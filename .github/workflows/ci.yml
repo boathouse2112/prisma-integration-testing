@@ -29,16 +29,17 @@ jobs:
           --health-retries 5
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Install Dependencies
-        run: yarn install --frozen-lockfile
-      - name: Integration testing
-        run: |
-          yarn prisma db push
-          yarn test:integration
-        env:
-          DATABASE_URL: postgresql://localUser:localPassword@localhost:5432/test
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install Dependencies
+      run: yarn install --frozen-lockfile
+    - name: Integration testing
+      run: |
+        yarn prisma db push
+        yarn test:integration
+      env:
+        DATABASE_URL: postgresql://localUser:localPassword@localhost:5432/test
+
